@@ -314,8 +314,6 @@ namespace GUI_Calculator
         static void Main()
         {
             Application.Run(new AnaPencere());
-
-
         }
     }
 }
