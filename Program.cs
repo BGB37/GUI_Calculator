@@ -2,6 +2,7 @@ using System;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
+using System.Xml.Linq;
 
 namespace GUI_Calculator
 {
@@ -9,6 +10,7 @@ namespace GUI_Calculator
     class AnaPencere : Form  // For sınıfından türeterek yeni bir sınıf oluşturuyoruz. Çok biçimlilik(Polymorphism) örneği.
     {
         private TextBox txtBox;
+    
         Button btnZero, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnAdd, btnSub, btnMul, btnEqu, btnClear, btnDiv, btnDot;
 
         private string islem = "";
@@ -24,9 +26,110 @@ namespace GUI_Calculator
             }
         }
 
+        private void btnZero_MouseHover(object sender, EventArgs e)
+        {
+            btnZero.BackColor = Color.LightBlue;
+        }
+
+        private void btnZero_MouseLeave(object sender, EventArgs e)
+        {
+            btnZero.BackColor = Color.Wheat;
+        }
+        private void btn1_MouseHover(object sender, EventArgs e)
+        {
+            btn1.BackColor = Color.LightBlue;
+        }
+
+        private void btn1_MouseLeave(object sender, EventArgs e)
+        {
+            btn1.BackColor = Color.Wheat;
+        }
+
+        private void btn2_MouseHover(object sender, EventArgs e)
+        {
+            btn2.BackColor = Color.LightBlue;
+        }
+
+        private void btn2_MouseLeave(object sender, EventArgs e)
+        {
+            btn2.BackColor = Color.Wheat;
+        }
+
+        private void btn3_MouseHover(object sender, EventArgs e)
+        {
+            btn3.BackColor = Color.LightBlue;
+        }
+
+        private void btn3_MouseLeave(object sender, EventArgs e)
+        {
+            btn3.BackColor = Color.Wheat;
+        }
+
+        private void btn4_MouseHover(object sender, EventArgs e)
+        {
+            btn4.BackColor = Color.LightBlue;
+        }
+
+        private void btn4_MouseLeave(object sender, EventArgs e)
+        {
+            btn4.BackColor = Color.Wheat;
+        }
+
+        private void btn5_MouseHover(object sender, EventArgs e)
+        {
+            btn5.BackColor = Color.LightBlue;
+        }
+
+        private void btn5_MouseLeave(object sender, EventArgs e)
+        {
+            btn1.BackColor = Color.Wheat;
+        }
+
+        private void btn6_MouseHover(object sender, EventArgs e)
+        {
+            btn6.BackColor = Color.LightBlue;
+        }
+
+        private void btn6_MouseLeave(object sender, EventArgs e)
+        {
+            btn6.BackColor = Color.Wheat;
+        }
+
+        private void btn7_MouseHover(object sender, EventArgs e)
+        {
+            btn7.BackColor = Color.LightBlue;
+        }
+
+        private void btn7_MouseLeave(object sender, EventArgs e)
+        {
+            btn7.BackColor = Color.Wheat;
+        }
+
+        private void btn8_MouseHover(object sender, EventArgs e)
+        {
+            btn8.BackColor = Color.LightBlue;
+        }
+
+        private void btn8_MouseLeave(object sender, EventArgs e)
+        {
+            btn8.BackColor = Color.Wheat;
+        }
+
+        private void btn9_MouseHover(object sender, EventArgs e)
+        {
+            btn9.BackColor = Color.LightBlue;
+        }
+
+        private void btn9_MouseLeave(object sender, EventArgs e)
+        {
+            btn9.BackColor = Color.Wheat;
+        }
         public void btnClear_click(object dugme, EventArgs e)
         {
-            txtBox.Text = ""; // Sadece girilen son karakteri silecek şekilde geliştirilebilir.
+            if(txtBox.Text != "") {    //YENİ GELİŞTİRME -- Sayıları teker tker silme sorununu çözdüm. Ayrıca txtBox.Textboş ise, C tuşuna basıldığında program kapanmıyor. 
+            int Length = txtBox.Text.Length - 1;
+            txtBox.Text = txtBox.Text.Remove(Length);   // Sadece girilen son karakteri silecek şekilde geliştirilebilir. .Length denedim ve yapamadım çünkü .Lenght zero based saymaz!
+            }
         }
 
         public void btnIslem_Click(object dugme, EventArgs e)
@@ -143,17 +246,45 @@ namespace GUI_Calculator
             btn8 = new Button();
             btn9 = new Button();
 
-            btnZero.Click += btnNumber_click; //Button sınıfından yarattığımız objelerin click eventleri alanına kendi yazacağımız fonksiyon isimlerini ekliyoruz ki tıklandığında çalışsın.
-            btn1.Click += btnNumber_click;
-            btn2.Click += btnNumber_click;
-            btn3.Click += btnNumber_click;
-            btn4.Click += btnNumber_click;
-            btn5.Click += btnNumber_click;
-            btn6.Click += btnNumber_click;
-            btn7.Click += btnNumber_click;
-            btn8.Click += btnNumber_click;
-            btn9.Click += btnNumber_click;
+            btnZero.Click += btnNumber_click; //Button sınıfından yarattığımız objelerin click eventleri alanına kendi yazacağımız fonksiyon isimlerini Zerokliyoruz ki tıklanZeroığında çalışsın.
+            btnZero.MouseHover += btnZero_MouseHover;
+            btnZero.MouseLeave += btnZero_MouseLeave;
 
+            btn1.Click += btnNumber_click;
+            btn1.MouseHover += btn1_MouseHover;
+            btn1.MouseLeave += btn1_MouseLeave;
+
+            btn2.Click += btnNumber_click;
+            btn2.MouseHover += btn2_MouseHover;
+            btn2.MouseLeave += btn2_MouseLeave;
+
+            btn3.Click += btnNumber_click;
+            btn3.MouseHover += btn3_MouseHover;
+            btn3.MouseLeave += btn3_MouseLeave;
+
+            btn4.Click += btnNumber_click;
+            btn4.MouseHover += btn4_MouseHover;
+            btn4.MouseLeave += btn4_MouseLeave;
+
+            btn5.Click += btnNumber_click;
+            btn5.MouseHover += btn5_MouseHover;
+            btn5.MouseLeave += btn5_MouseLeave;
+
+            btn6.Click += btnNumber_click;
+            btn6.MouseHover += btn6_MouseHover;
+            btn6.MouseLeave += btn6_MouseLeave;
+
+            btn7.Click += btnNumber_click;
+            btn7.MouseHover += btn7_MouseHover;
+            btn7.MouseLeave += btn7_MouseLeave;
+
+            btn8.Click += btnNumber_click;
+            btn8.MouseHover += btn8_MouseHover;
+            btn8.MouseLeave += btn8_MouseLeave;
+
+            btn9.Click += btnNumber_click;
+            btn9.MouseHover += btn9_MouseHover;
+            btn9.MouseLeave += btn9_MouseLeave;
 
             btnAdd = new Button();
             btnSub = new Button();
@@ -258,6 +389,7 @@ namespace GUI_Calculator
             btnZero.Top = 250;
             btnZero.Left = 10;
             
+
             btnMul.Text = "x";
             btnMul.Width = 50;
             btnMul.Height = 50;
@@ -285,6 +417,8 @@ namespace GUI_Calculator
             btnDot.Top = 250;
             btnDot.Left = 190;
             btnDot.Font = new Font(new FontFamily("Arial"), 20F);
+
+
             //Fourth Row End
 
             this.Controls.Add(btnZero);
@@ -306,14 +440,16 @@ namespace GUI_Calculator
             this.Controls.Add(txtBox);
             this.Controls.Add(btnDot);
         }
-
     };
+
 
     internal class Program
     {
         static void Main()
         {
             Application.Run(new AnaPencere());
+
+
         }
     }
 }
