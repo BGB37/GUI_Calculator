@@ -82,7 +82,7 @@ namespace GUI_Calculator
 
         private void btn5_MouseLeave(object sender, EventArgs e)
         {
-            btn1.BackColor = Color.Wheat;
+            btn5.BackColor = Color.Wheat;
         }
 
         private void btn6_MouseHover(object sender, EventArgs e)
@@ -221,7 +221,7 @@ namespace GUI_Calculator
 
         public AnaPencere() // AnaPencerenin constructor'ı.
         {
-            this.Text = "Şablon GUI App";
+            this.Text = "GUI Calculator";
             this.BackColor = Color.Wheat;
             this.Width = 270;
             this.Height = 420;
@@ -441,15 +441,12 @@ namespace GUI_Calculator
             this.Controls.Add(btnDot);
         }
     };
-
-
+    
     internal class Program
     {
         static void Main()
         {
             Application.Run(new AnaPencere());
-
-
         }
     }
 }
