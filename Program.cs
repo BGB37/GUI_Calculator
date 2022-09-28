@@ -10,20 +10,68 @@ namespace GUI_Calculator
     class AnaPencere : Form  // For sınıfından türeterek yeni bir sınıf oluşturuyoruz. Çok biçimlilik(Polymorphism) örneği.
     {
         private TextBox txtBox;
-    
+
         Button btnZero, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnAdd, btnSub, btnMul, btnEqu, btnClear, btnDiv, btnDot;
 
-        private string islem = "";
+        private string sign = "";
 
-        public void btnNumber_click(object dugme, EventArgs e)
+        public void btnNumber_click(object btn, EventArgs e)
         {
-            var t = ((Button)dugme).Text;  // Burayı incele. Parantez içinde yaptığımız işlem Button'a cast etmek diye bahsediliyor.
+            var t = ((Button)btn).Text;  // Burayı incele. Parantez içinde yaptığımız işlem Button'a cast etmek diye bahsediliyor.
             txtBox.Text += t; // Atama yapmıyoruz mevcuda ekleme yapıyoruz.
 
             if (txtBox.Text[0] == '0') // İlk girilen sayı 0 sa,
             {
                 txtBox.Text = txtBox.Text.Remove(0, 1); // Sayıyı ekranda gösterme çünkü sıfırlı bir sayıyla işlem yapılamaz. TextBox sınıfının Text propertysinin Remove() metetotunu kullandık.
             }
+        }
+
+        private void btnAdd_MouseHover(object sender, EventArgs e)
+        {
+            btnAdd.BackColor = Color.Blue;
+            btnAdd.ForeColor = Color.White;
+        }
+
+        private void btnAdd_MouseLeave(object sender, EventArgs e)
+        {
+            btnAdd.BackColor = Color.Wheat;
+            btnAdd.ForeColor = Color.Black;
+        }
+
+        private void btnSub_MouseHover(object sender, EventArgs e)
+        {
+            btnSub.BackColor = Color.Blue;
+            btnSub.ForeColor = Color.White;
+        }
+
+        private void btnSub_MouseLeave(object sender, EventArgs e)
+        {
+            btnSub.BackColor = Color.Wheat;
+            btnSub.ForeColor = Color.Black;
+        }
+
+        private void btnMul_MouseHover(object sender, EventArgs e)
+        {
+            btnMul.BackColor = Color.Blue;
+            btnMul.ForeColor = Color.White;
+        }
+
+        private void btnMul_MouseLeave(object sender, EventArgs e)
+        {
+            btnMul.BackColor = Color.Wheat;
+            btnMul.ForeColor = Color.Black;
+        }
+
+        private void btnDiv_MouseHover(object sender, EventArgs e)
+        {
+            btnDiv.BackColor = Color.Blue;
+            btnDiv.ForeColor = Color.White;
+        }
+
+        private void btnDiv_MouseLeave(object sender, EventArgs e)
+        {
+            btnDiv.BackColor = Color.Wheat;
+            btnDiv.ForeColor = Color.Black;
         }
 
         private void btnZero_MouseHover(object sender, EventArgs e)
@@ -126,18 +174,19 @@ namespace GUI_Calculator
         }
         public void btnClear_click(object dugme, EventArgs e)
         {
-            if(txtBox.Text != "") {    //YENİ GELİŞTİRME -- Sayıları teker tker silme sorununu çözdüm. Ayrıca txtBox.Textboş ise, C tuşuna basıldığında program kapanmıyor. 
-            int Length = txtBox.Text.Length - 1;
-            txtBox.Text = txtBox.Text.Remove(Length);   // Sadece girilen son karakteri silecek şekilde geliştirilebilir. .Length denedim ve yapamadım çünkü .Lenght zero based saymaz!
+            if (txtBox.Text != "")
+            {    //YENİ GELİŞTİRME -- Sayıları teker tker silme sorununu çözdüm. Ayrıca txtBox.Textboş ise, C tuşuna basıldığında program kapanmıyor. 
+                int Length = txtBox.Text.Length - 1;
+                txtBox.Text = txtBox.Text.Remove(Length);   // Sadece girilen son karakteri silecek şekilde geliştirilebilir. .Length denedim ve yapamadım çünkü .Lenght zero based saymaz!
             }
         }
 
-        public void btnIslem_Click(object dugme, EventArgs e)
+        public void btnIslem_Click(object btn, EventArgs e)
         {
-            var t = ((Button)dugme).Text; //dugmenin texti dört işlem sembollerinden biri olmak zorunda.
+            var t = ((Button)btn).Text; //dugmenin texti dört işlem sembollerinden biri olmak zorunda.
             txtBox.Text = txtBox.Text + " " + t + " ";
 
-            islem = t; // Hangi işlem tuşuna basıldığını tutmak için global olarak islem değişkenini string olarak tanımladık. Burada hangi tuşa basıldıysa ona atanmış olan işlem stringini tutacak. X - / - + - -(çıkarma sembolü). 
+            sign = t; // Hangi işlem tuşuna basıldığını tutmak için global olarak islem değişkenini string olarak tanımladık. Burada hangi tuşa basıldıysa ona atanmış olan işlem stringini tutacak. X - / - + - -(çıkarma sembolü). 
         }
 
         public void btnDot_click(object sender, EventArgs e)
@@ -148,14 +197,14 @@ namespace GUI_Calculator
         public void btnEqu_Click(object dugme, EventArgs e)
         {
 
-            var ifade = txtBox.Text.Split(islem[0]); //islem stringinin içindeki ilk elemanı almak için indisli yazdık. Aslında zaten tek karakter ama metot char veri tipi istediği için bu sayede bunu da çözmüş olduk.
+            var ifade = txtBox.Text.Split(sign[0]); //islem stringinin içindeki ilk elemanı almak için indisli yazdık. Aslında zaten tek karakter ama metot char veri tipi istediği için bu sayede bunu da çözmüş olduk.
             // DOUBLE sayı girilmesi durumuda yapılacak işlemler.
             if (ifade[0].Contains(".") || ifade[1].Contains("."))
             {
                 double n1 = Convert.ToDouble(ifade[0]);
                 double n2 = Convert.ToDouble(ifade[1]);
 
-                switch (islem)
+                switch (sign)
                 {
                     case "+":
                         txtBox.Text = $"{n1 + n2}";
@@ -187,7 +236,7 @@ namespace GUI_Calculator
                 ulong n1 = Convert.ToUInt64(ifade[0]); // ifadenin solunda kalan sayıya n1 diyoruz.
                 ulong n2 = Convert.ToUInt64(ifade[1]);
 
-                switch (islem)
+                switch (sign)
                 {
                     case "+":
                         txtBox.Text = $"{n1 + n2}";
@@ -214,8 +263,8 @@ namespace GUI_Calculator
             }
         }
 
-            
-         
+
+
 
 
 
@@ -295,11 +344,25 @@ namespace GUI_Calculator
             btnDot = new Button();
 
             btnAdd.Click += btnIslem_Click;
+            btnAdd.MouseHover += btnAdd_MouseHover;
+            btnAdd.MouseLeave += btnAdd_MouseLeave;
+
             btnSub.Click += btnIslem_Click;
-            btnMul.Click += btnIslem_Click;         // Sağ tarafta yazan fonksiyon isimlerini buton isimlerinin Click eventlerine ekliyoruz. En azından benim henüz anladığım bu:)
+            btnSub.MouseHover += btnSub_MouseHover;
+            btnSub.MouseLeave += btnSub_MouseLeave;
+
+            btnMul.Click += btnIslem_Click;                  // Sağ tarafta yazan fonksiyon isimlerini buton isimlerinin Click eventlerine ekliyoruz. En azından benim henüz anladığım bu:)
+            btnMul.MouseHover += btnMul_MouseHover;
+            btnMul.MouseLeave += btnMul_MouseLeave;
+            
             btnDiv.Click += btnIslem_Click;
+            btnDiv.MouseHover += btnDiv_MouseHover;
+            btnDiv.MouseLeave += btnDiv_MouseLeave;
+
             btnEqu.Click += btnEqu_Click;
+
             btnClear.Click += btnClear_click;
+
             btnDot.Click += btnDot_click;
 
             // First Row Start 
@@ -388,7 +451,7 @@ namespace GUI_Calculator
             btnZero.Height = 50;
             btnZero.Top = 250;
             btnZero.Left = 10;
-            
+
 
             btnMul.Text = "x";
             btnMul.Width = 50;
@@ -441,7 +504,7 @@ namespace GUI_Calculator
             this.Controls.Add(btnDot);
         }
     };
-    
+
     internal class Program
     {
         static void Main()
@@ -450,3 +513,8 @@ namespace GUI_Calculator
         }
     }
 }
+
+
+/* TO DO LIST
+  4 + = --> Breaks the program. Handle this.
+*/
